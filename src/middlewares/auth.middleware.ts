@@ -3,7 +3,8 @@ import type { Request, Response, NextFunction } from 'express';
 declare module 'express-session' {
   interface SessionData {
     userId: number;
-    errors?: any[];
+    errors?: Record<string, string>;
+    formData?: Record<string, unknown>;
   }
 }
 

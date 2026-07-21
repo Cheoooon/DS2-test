@@ -8,7 +8,11 @@ export const list = async (req: Request, res: Response) => {
 };
 
 export const createForm = (req: Request, res: Response) => {
-  res.render('contacts/create');
+  const errors = req.session.errors;
+  const formData = req.session.formData;
+  delete req.session.errors;
+  delete req.session.formData;
+  res.render('contacts/create', { errors, formData });
 };
 
 export const create = async (req: Request, res: Response) => {
@@ -19,9 +23,13 @@ export const create = async (req: Request, res: Response) => {
 
 export const editForm = async (req: Request, res: Response) => {
   if (!req.session.userId) return res.redirect('/login');
+  const errors = req.session.errors;
+  const formData = req.session.formData;
+  delete req.session.errors;
+  delete req.session.formData;
   const contact = await ContactModel.findByIdAndUserId(Number(req.params.id), req.session.userId);
   if (!contact) return res.status(404).send('Contacto no encontrado');
-  res.render('contacts/edit', { contact });
+  res.render('contacts/edit', { contact, errors, formData: formData || contact });
 };
 
 export const update = async (req: Request, res: Response) => {

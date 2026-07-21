@@ -1,17 +1,15 @@
 <div class="max-w-md mx-auto bg-white p-8 rounded shadow">
-{{#if errors}}
-  <div class="bg-red-100 text-red-700 p-2 mb-4 rounded">
-    {{#each errors}}
-      <p>{{this.path}}: {{this.message}}</p>
-    {{/each}}
-  </div>
-{{/if}}
   <h1 class="text-2xl font-bold mb-4">Crear Contacto</h1>
   <form action="/contacts" method="POST" class="space-y-4">
-    <input type="text" name="name" placeholder="Nombre" class="w-full p-2 border rounded" required>
-    <input type="text" name="alias" placeholder="Alias" class="w-full p-2 border rounded">
-    <input type="email" name="email" placeholder="Email" class="w-full p-2 border rounded">
-    <input type="text" name="phone" placeholder="Teléfono" class="w-full p-2 border rounded">
+    <input type="text" name="name" placeholder="Nombre" value="{{formData.name}}" class="w-full p-2 border rounded" required>
+    {{#if errors.name}} <p class="text-red-500 text-xs">{{errors.name}}</p> {{/if}}
+    <input type="text" name="alias" placeholder="Alias" value="{{formData.alias}}" class="w-full p-2 border rounded">
+    {{#if errors.alias}} <p class="text-red-500 text-xs">{{errors.alias}}</p> {{/if}}
+    <input type="email" name="email" placeholder="Email" value="{{formData.email}}" class="w-full p-2 border rounded">
+    {{#if errors.email}} <p class="text-red-500 text-xs">{{errors.email}}</p> {{/if}}
+    <input type="text" name="phone" placeholder="Teléfono" value="{{formData.phone}}" class="w-full p-2 border rounded">
+    {{#if errors.phone}} <p class="text-red-500 text-xs">{{errors.phone}}</p> {{/if}}
     <button type="submit" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">Guardar</button>
+    <a href="/contacts" class="block text-center mt-2 text-gray-600">Cancelar</a>
   </form>
 </div>

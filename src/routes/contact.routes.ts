@@ -9,8 +9,10 @@ const router: RouterType = Router();
 router.use(isAuthenticated);
 
 router.get('/contacts', ContactController.list);
+router.get('/contacts/create', ContactController.createForm);
 router.post('/contacts', validate(contactSchema), ContactController.create);
 router.post('/contacts/edit/:id', validate(contactSchema), ContactController.update);
+router.get('/contacts/edit/:id', ContactController.editForm);
 router.post('/contacts/delete/:id', ContactController.remove);
 
 export default router;
