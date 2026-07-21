@@ -1,3 +1,4 @@
+import { initDb } from './config/database.js';
 import express from 'express';
 import authRoutes from './routes/auth.routes.js';
 import contactRoutes from './routes/contact.routes.js';
@@ -15,10 +16,16 @@ const port = 3000;
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'fallback_secret',
+
   resave: false,
   saveUninitialized: false,
 }));
-app.engine('handlebars', engine());
+await initDb();
+app.engine('handlebars', engine({
+  defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, 'views', 'layouts'),
+  partialsDir: path.join(__dirname, 'views', 'partials')
+}));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 app.use(authRoutes);

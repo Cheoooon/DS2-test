@@ -1,4 +1,4 @@
-import db from '../config/database.js';
+import { dbPromise } from '../config/database.js';
 
 export interface User {
   id: number;
@@ -6,12 +6,12 @@ export interface User {
   password: string;
 }
 
-export const createUser = (email: string, password: string) => {
-  const stmt = db.prepare('INSERT INTO users (email, password) VALUES (?, ?)');
-  return stmt.run(email, password);
+export const createUser = async (email: string, password: string) => {
+  const db = await dbPromise;
+  return await db.run('INSERT INTO users (email, password) VALUES (?, ?)', [email, password]);
 };
 
-export const findByEmail = (email: string): User | undefined => {
-  const stmt = db.prepare('SELECT * FROM users WHERE email = ?');
-  return stmt.get(email) as User | undefined;
+export const findByEmail = async (email: string): Promise<User | undefined> => {
+  const db = await dbPromise;
+  return await db.get<User>('SELECT * FROM users WHERE email = ?', [email]);
 };
