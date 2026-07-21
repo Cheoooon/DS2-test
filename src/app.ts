@@ -1,6 +1,7 @@
 import { initDb } from './config/database.js';
 import express from 'express';
 import authRoutes from './routes/auth.routes.js';
+import { authLocals } from './middlewares/auth.locals.js';
 import contactRoutes from './routes/contact.routes.js';
 import { isAuthenticated } from './middlewares/auth.middleware.js';
 import session from 'express-session';
@@ -27,6 +28,7 @@ app.engine('handlebars', engine({
   partialsDir: path.join(__dirname, 'views', 'partials')
 }));
 app.set('view engine', 'handlebars');
+app.use(authLocals);
 app.set('views', path.join(__dirname, 'views'));
 app.use(authRoutes);
 app.use(contactRoutes);
