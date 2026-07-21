@@ -29,7 +29,8 @@ export const editForm = async (req: Request, res: Response) => {
   if (!req.session.userId) return res.redirect('/login');
   const contact = await ContactModel.findByIdAndUserId(Number(req.params.id), req.session.userId);
   if (!contact) return res.status(404).send('Contacto no encontrado');
-  res.render('contacts/edit', { contact });
+  const formData = res.locals.formData || contact;
+  res.render('contacts/edit', { contact, formData });
 };
 
 export const update = async (req: Request, res: Response) => {
