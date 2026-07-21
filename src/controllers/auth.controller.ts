@@ -22,7 +22,9 @@ export const login = async (req: Request, res: Response) => {
     req.session.userId = user.id;
     res.redirect('/dashboard');
   } else {
-    res.status(401).send('Credenciales inválidas');
+    req.session.errors = { email: 'Credenciales inválidas' };
+    req.session.formData = { email };
+    return res.redirect('/login');
   }
 };
 
