@@ -1,23 +1,30 @@
-<h1>Dashboard</h1>
-<a href="/contacts/create">Crear contacto</a>
-<table>
-  <tr>
-    <th>Nombre</th>
-    <th>Alias</th>
-    <th>Email</th>
-    <th>Teléfono</th>
-    <th>Acciones</th>
-  </tr>
-  {{#each contacts}}
-  <tr>
-    <td>{{this.name}}</td>
-    <td>{{this.alias}}</td>
-    <td>{{this.email}}</td>
-    <td>{{this.phone}}</td>
-    <td>
-      <a href="/contacts/edit/{{this.id}}">Editar</a>
-      <form action="/contacts/delete/{{this.id}}" method="POST" style="display:inline">
-        <button type="submit">Eliminar</button>
+<div class="bg-white p-6 rounded shadow">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">Contactos</h1>
+    <a href="/contacts/create" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Agregar Contacto</a>
+  </div>
+  <table class="w-full text-left">
+    <thead class="border-b">
+      <tr><th class="p-2">Nombre</th><th class="p-2">Alias</th><th class="p-2">Email</th><th class="p-2">Teléfono</th><th class="p-2">Acciones</th></tr>
+    </thead>
+    <tbody>
+      {{#each contacts}}
+      <tr class="border-b">
+        <td class="p-2">{{this.name}}</td>
+        <td class="p-2">{{this.alias}}</td>
+        <td class="p-2">{{this.email}}</td>
+        <td class="p-2">{{this.phone}}</td>
+        <td class="p-2">
+          <a href="/contacts/edit/{{this.id}}" class="text-blue-500 mr-2">Editar</a>
+          <form action="/contacts/delete/{{this.id}}" method="POST" class="inline">
+            <button type="submit" class="text-red-500">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
       </form>
     </td>
   </tr>

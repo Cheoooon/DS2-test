@@ -1,5 +1,20 @@
 <!DOCTYPE html>
-<html>
-<head><title>App</title></head>
-<body>{{{body}}}</body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Contactos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <nav class="bg-white shadow-sm p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-gray-800">Mis Contactos</h1>
+    <form action="/logout" method="POST">
+      <button type="submit" class="text-red-600 hover:text-red-800 font-medium">Cerrar sesión</button>
+    </form>
+  </nav>
+  <main class="container mx-auto p-4">
+    {{{body}}}
+  </main>
+</body>
 </html>
