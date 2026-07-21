@@ -9,7 +9,9 @@ export const register = async (req: Request, res: Response) => {
     await UserModel.createUser(email, hashedPassword);
     res.redirect('/login');
   } catch (error) {
-    res.status(400).send('Error registrando usuario');
+    req.session.errors = { email: 'Este email ya está registrado' };
+    req.session.formData = { email };
+    return res.redirect('/register');
   }
 };
 

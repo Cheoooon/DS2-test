@@ -34,6 +34,7 @@ export const editForm = async (req: Request, res: Response) => {
 
 export const update = async (req: Request, res: Response) => {
   if (!req.session.userId) return res.redirect('/login');
+  console.log('Updating contact:', req.params.id, req.body);
   await ContactModel.update(Number(req.params.id), req.session.userId, req.body);
   res.redirect('/contacts');
 };

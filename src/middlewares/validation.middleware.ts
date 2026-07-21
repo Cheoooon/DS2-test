@@ -12,7 +12,8 @@ export const validate = (schema: ZodSchema) => {
       });
       req.session.errors = errors;
       req.session.formData = req.body;
-      return res.redirect('back');
+      const referer = req.header('Referer') || '/contacts';
+      return res.redirect(referer);
     }
     req.body = result.data;
     next();
