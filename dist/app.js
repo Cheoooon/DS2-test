@@ -1,5 +1,6 @@
 import express from 'express';
 import authRoutes from './routes/auth.routes.js';
+import contactRoutes from './routes/contact.routes.js';
 import { isAuthenticated } from './middlewares/auth.middleware.js';
 import session from 'express-session';
 import { engine } from 'express-handlebars';
@@ -18,9 +19,8 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 app.use(authRoutes);
-app.get('/dashboard', isAuthenticated, (req, res) => {
-    res.render('dashboard', { userId: req.session.userId });
-});
+app.use(contactRoutes);
+app.get('/dashboard', isAuthenticated, (req, res) => res.redirect('/contacts'));
 app.get('/', (req, res) => {
     res.send('MVC Initialized');
 });

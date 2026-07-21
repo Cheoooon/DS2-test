@@ -23,4 +23,17 @@ db.exec(`
   )
 `);
 
+// Inicializar tabla de contactos
+db.exec(`
+  CREATE TABLE IF NOT EXISTS contacts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    alias TEXT,
+    email TEXT,
+    phone TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+  )
+`);
+
 export default db;

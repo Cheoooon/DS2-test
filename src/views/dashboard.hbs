@@ -1,5 +1,28 @@
 <h1>Dashboard</h1>
-<p>Bienvenido, usuario {{userId}}</p>
+<a href="/contacts/create">Crear contacto</a>
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Alias</th>
+    <th>Email</th>
+    <th>Teléfono</th>
+    <th>Acciones</th>
+  </tr>
+  {{#each contacts}}
+  <tr>
+    <td>{{this.name}}</td>
+    <td>{{this.alias}}</td>
+    <td>{{this.email}}</td>
+    <td>{{this.phone}}</td>
+    <td>
+      <a href="/contacts/edit/{{this.id}}">Editar</a>
+      <form action="/contacts/delete/{{this.id}}" method="POST" style="display:inline">
+        <button type="submit">Eliminar</button>
+      </form>
+    </td>
+  </tr>
+  {{/each}}
+</table>
 <form action="/logout" method="POST">
-  <button type="submit">Logout</button>
+  <button type="submit">Cerrar sesión</button>
 </form>
